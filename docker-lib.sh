@@ -51,7 +51,9 @@ start_docker() {
     mount -o remount,rw /proc/sys
   fi
 
-  local server_args=""
+  local mtu=$(cat /sys/class/net/$(ip route get 8.8.8.8|awk '{ print $5 }')/mtu)
+  local server_args="--mtu ${mtu}"
+  local registry=""
 
   for registry in $1; do
     server_args="${server_args} --insecure-registry ${registry}"
@@ -61,11 +63,8 @@ start_docker() {
     server_args="${server_args} --registry-mirror=$2"
   fi
 
-  if [ -n "$3" ]; then
-    server_args="${server_args} -g=$3"
-  fi
 
-  docker daemon --data-root /scratch/docker ${server_args} >/tmp/docker.log 2>&1 &
+  dockerd --data-root /scratch/docker ${server_args} >/tmp/docker.log 2>&1 &
   echo $! > /tmp/docker.pid
 
   trap stop_docker EXIT
