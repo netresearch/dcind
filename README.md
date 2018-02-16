@@ -1,10 +1,10 @@
 # dcind (Docker-Compose-in-Docker)
 
-[![](https://images.microbadger.com/badges/image/amidos/dcind.svg)](http://microbadger.com/images/amidos/dcind "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/netresearch/dcind.svg)](http://microbadger.com/images/netresearch/dcind "Get your own image badge on microbadger.com")
 
-Use this ```Dockerfile``` to build a base image for your integration tests in [Concourse CI](http://concourse.ci/). Alternatively, you can use a ready-to-use image from the Docker Hub: [amidos/dcind](https://hub.docker.com/r/amidos/dcind/). The image is Alpine based.
+Use this ```Dockerfile``` to build a base image for your integration tests in [Concourse CI](http://concourse.ci/). Alternatively, you can use a ready-to-use image from the Docker Hub: [netresearch/dcind](https://hub.docker.com/r/netresearch/dcind/). The image is Alpine based.
 
-Here is an example of a Concourse [job](http://concourse.ci/concepts.html) that uses ```amidos/dcind``` image to run a bunch of containers in a task, and then runs the integration test suite. You can find a full version of this example in the [```example```](example) directory.
+Here is an example of a Concourse [job](http://concourse.ci/concepts.html) that uses ```netresearch/dcind``` image to run a bunch of containers in a task, and then runs the integration test suite. You can find a full version of this example in the [```example```](example) directory.
 
 ```yaml
   - name: integration
@@ -25,7 +25,7 @@ Here is an example of a Concourse [job](http://concourse.ci/concepts.html) that 
           image_resource:
             type: docker-image
             source:
-              repository: amidos/dcind
+              repository: netresearch/dcind
           inputs:
             - name: code
             - name: redis
