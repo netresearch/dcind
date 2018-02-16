@@ -28,5 +28,5 @@ ENTRYPOINT [ \
 	"switch", \
 		"shell=/bin/sh", "--", \
 	"codep", \
-		"/bin/docker daemon" \
+		"/bin/dockerd" \
 ]
