@@ -29,7 +29,8 @@ RUN apk --update --no-cache add \
  && mv entrykit /bin/entrykit \
  && entrykit --symlink \
 # cleanup
- && rm -rf /var/cache/apk/*
+ && rm -rf /var/cache/apk/* \
+ && rm -rf /root/.cache
 
 
 # Include useful functions to start/stop docker daemon in garden-runc containers in Concourse CI.
