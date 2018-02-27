@@ -58,7 +58,13 @@ start_docker() {
   local server_args="--mtu ${mtu}"
   local registry=""
 
-  server_args="${server_args} --max-concurrent-downloads=$1 --max-concurrent-uploads=$2"
+  if [ -n "$1" ]; then
+    server_args="${server_args} --max-concurrent-downloads=$1"
+  fi
+
+  if [ -n "$2" ]; then
+    server_args="${server_args} --max-concurrent-uploads=$2"
+  fi
 
   for registry in $3; do
     server_args="${server_args} --insecure-registry ${registry}"
