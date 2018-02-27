@@ -63,7 +63,7 @@ start_docker() {
     server_args="${server_args} --registry-mirror=$2"
   fi
 
-  server_args="${server_args} --experimental=true"
+  server_args="${server_args} --experimental"
 
   dockerd --data-root /scratch/docker ${server_args} >/tmp/docker.log 2>&1 &
   echo $! > /tmp/docker.pid
