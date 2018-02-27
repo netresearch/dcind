@@ -19,7 +19,6 @@ RUN apk --update --no-cache add \
     redis \
  && apk upgrade \
  && pip install docker-compose==${DOCKER_COMPOSE_VERSION} \
- && pip install docker-squash \
 # Install entrykit
  && curl -L https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERSION}/entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz | tar zx \
  && chmod +x entrykit \
