@@ -4,7 +4,7 @@ FROM docker:dind
 LABEL maintainer.1="André Hähnel <andre.haehnel@netresearch.de>" \
       maintainer.2="Sebastian Mendel <sebastian.mendel@netresearch.de>"
 
-ENV DOCKER_COMPOSE_VERSION=1.19.0 \
+ENV DOCKER_COMPOSE_VERSION=1.21.0 \
     ENTRYKIT_VERSION=0.4.0
 
 # Install Docker and Docker Compose
