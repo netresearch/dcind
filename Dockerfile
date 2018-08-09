@@ -33,9 +33,11 @@ RUN apk --update --no-cache add \
 # Example: source /docker-lib.sh && start_docker
 COPY docker-lib.sh /docker-lib.sh
 
+COPY setup /
+
 ENTRYPOINT [ \
 	"switch", \
-		"shell=/bin/sh", "--", \
+		"shell=/bin/bash", "--", \
 	"codep", \
 		"/usr/local/bin/dockerd" \
 ]
