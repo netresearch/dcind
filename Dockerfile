@@ -4,7 +4,7 @@ FROM docker:dind
 LABEL maintainer.1="André Hähnel <andre.haehnel@netresearch.de>" \
       maintainer.2="Sebastian Mendel <sebastian.mendel@netresearch.de>"
 
-ENV DOCKER_COMPOSE_VERSION=1.21.0 \
+ENV DOCKER_COMPOSE_VERSION=1.22.0 \
     ENTRYKIT_VERSION=0.4.0
 
 # Install Docker and Docker Compose
@@ -33,9 +33,11 @@ RUN apk --update --no-cache add \
 # Example: source /docker-lib.sh && start_docker
 COPY docker-lib.sh /docker-lib.sh
 
+COPY setup /
+
 ENTRYPOINT [ \
 	"switch", \
-		"shell=/bin/sh", "--", \
+		"shell=/bin/bash", "--", \
 	"codep", \
 		"/usr/local/bin/dockerd" \
 ]

@@ -49,15 +49,14 @@ Here is an example of a Concourse [job](http://concourse.ci/concepts.html) that 
                 docker load -i busybox/image
                 docker tag "$(cat busybox/image-id)" "$(cat busybox/repository):$(cat busybox/tag)"
 
-                # This is just to visually check in the log that images have been loaded successfully
+                message info This is just to visually check in the log that images have been loaded successfully
                 docker images
 
-                # Run the container with tests and its dependencies.
+                message Run the container with tests and its dependencies.
                 docker-compose -f code/example/integration.yml run tests
 
-                # Cleanup.
-                # Not sure if this is required.
-                # It's quite possible that Concourse is smart enough to clean up the Docker mess itself.
+                message header Cleanup.
+                message info Not sure if this is required. It's quite possible that Concourse is smart enough to clean up the Docker mess itself.
                 docker-compose -f code/example/integration.yml down
                 docker volume rm $(docker volume ls -q)
 
