@@ -62,3 +62,22 @@ Here is an example of a Concourse [job](http://concourse.ci/concepts.html) that 
 
 
 ```
+
+## Included tools
+
+### Messages
+For better organized log files, this image provides commands on the CLI for a colourful output:
+
+```bash
+message info "Short info message"
+
+message header "Big headline with deviders"
+
+message error 418 "Error message with exit code"
+
+message warn "Use it when something goes wrong"
+
+message ok "Use it for successful processes"
+
+message code "<example>My exaple code</example>"
+```
