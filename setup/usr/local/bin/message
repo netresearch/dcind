@@ -32,8 +32,7 @@ function message() {
 
 function messageError {
     message "${red}erro${norm}" "${@:2}"
-    spinner_stop $?
-	exit $1
+    exit $1
 }
 
 function messageWarn {
@@ -54,7 +53,7 @@ function messageCode {
 
 function messageHeader {
     echo -e "\n${blue}-----------------------------------------------------------------------------------------------------------${norm}"
-	echo -e "::::\t$*"
+    echo -e "::::\t$*"
     echo -e "${blue}-----------------------------------------------------------------------------------------------------------${norm}\n"
 }
 
