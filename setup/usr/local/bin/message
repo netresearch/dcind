@@ -31,7 +31,7 @@ function message() {
 }
 
 function messageError {
-    message "${red}erro${norm}" "${@:2}"
+    message "${red}erro${norm}" "${*}"
     exit $1
 }
 
