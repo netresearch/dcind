@@ -12,9 +12,11 @@ RUN apk --update --no-cache add \
     bash \
     coreutils \
     curl \
+    git \
     device-mapper \
     iptables \
     make \
+    openssh \
     py-pip \
     redis \
  && apk upgrade \
@@ -28,6 +30,8 @@ RUN apk --update --no-cache add \
  && rm -rf /var/cache/apk/* \
  && rm -rf /root/.cache
 
+RUN ssh-keyscan -H git.netresearch.de >> /etc/ssh/ssh_known_hosts &&\
+    ssh-keyscan -H github.com >> /etc/ssh/ssh_known_hosts
 
 # Include useful functions to start/stop docker daemon in garden-runc containers in Concourse CI.
 # Example: source /docker-lib.sh && start_docker
