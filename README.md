@@ -1,6 +1,6 @@
 # dcind (Docker-Compose-in-Docker)
 
-Use this ```Dockerfile``` to build a base image for your integration tests in [Concourse CI](http://concourse.ci/) ir GitLab CI/CD. Alternatively, you can use a ready-to-use image: [ghcr.io/netresearch/dcind](https://github.com/netresearch/dcind/pkgs/container/dcind). The image is Alpine based.
+Use this ```Dockerfile``` to build a base image for your integration tests in [Concourse CI](http://concourse.ci/) or GitLab CI/CD. Alternatively, you can use a ready-to-use image: [ghcr.io/netresearch/dcind](https://github.com/netresearch/dcind/pkgs/container/dcind). The image is Alpine based.
 
 Here is an example of a Concourse [job](http://concourse.ci/concepts.html) that uses ```ghcr.io/netresearch/dcind``` image to run a bunch of containers in a task, and then runs the integration test suite. You can find a full version of this example in the [```example```](example) directory.
 
