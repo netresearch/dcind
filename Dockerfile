@@ -1,12 +1,9 @@
-FROM docker:dind as upstream
+FROM docker:dind AS upstream
 
-ENV DOCKER_COMPOSE_VERSION=2.2.2 \
-    ENTRYKIT_VERSION=0.4.0
+ENV ENTRYKIT_VERSION=0.4.0
 
-# Install Docker and Docker Compose
-RUN apk update
-RUN apk upgrade
-RUN apk add \
+# Install system packages
+RUN apk update && apk upgrade && apk add --no-cache \
     bash \
     coreutils \
     curl \
@@ -14,20 +11,20 @@ RUN apk add \
     iptables \
     make \
     redis
-RUN mkdir -p /usr/local/lib/docker/cli-plugins
-RUN curl -o /usr/local/lib/docker/cli-plugins/docker-compose -L https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-linux-x86_64
-RUN chmod ugo+x /usr/local/lib/docker/cli-plugins/docker-compose
-RUN ln -s /usr/local/lib/docker/cli-plugins/docker-compose /usr/local/bin/
-RUN docker compose version
-RUN docker-compose version
+
+# Ensure docker-compose CLI compatibility symlink exists (docker:dind ships with compose plugin)
+RUN ln -sf /usr/local/lib/docker/cli-plugins/docker-compose /usr/local/bin/docker-compose \
+    && docker compose version \
+    && docker-compose version
+
 # Install entrykit
-RUN curl -L https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERSION}/entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz | tar zx
-RUN chmod +x entrykit
-RUN mv entrykit /usr/local/bin/entrykit
-RUN entrykit --symlink
+RUN curl -L https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERSION}/entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz | tar zx \
+    && chmod +x entrykit \
+    && mv entrykit /usr/local/bin/entrykit \
+    && entrykit --symlink
+
 # cleanup
-RUN rm -rf /var/cache/apk/*
-RUN rm -rf /root/.cache
+RUN rm -rf /var/cache/apk/* /root/.cache
 
 # copy everything to a clean image, so we can change the exposed ports
 # this is required to fix GitLab CI/CD - which is waitng for all exposed ports
