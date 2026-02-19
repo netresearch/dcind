@@ -2,6 +2,13 @@ LOG_FILE=${LOG_FILE:-/tmp/docker.log}
 SKIP_PRIVILEGED=${SKIP_PRIVILEGED:-false}
 
 sanitize_cgroups() {
+  # cgroups v2: unified hierarchy, no per-subsystem mounts needed.
+  # modern dockerd handles cgroups v2 natively.
+  if [ -f /sys/fs/cgroup/cgroup.controllers ]; then
+    return 0
+  fi
+
+  # cgroups v1: mount individual subsystems
   mkdir -p /sys/fs/cgroup
   mountpoint -q /sys/fs/cgroup || \
     mount -t tmpfs -o uid=0,gid=0,mode=0755 cgroup /sys/fs/cgroup
