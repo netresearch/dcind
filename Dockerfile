@@ -13,7 +13,7 @@ RUN apk update && apk upgrade && apk add --no-cache \
     redis
 
 # Ensure docker-compose CLI compatibility symlink exists (docker:dind ships with compose plugin)
-RUN ln -sf /usr/local/lib/docker/cli-plugins/docker-compose /usr/local/bin/docker-compose \
+RUN ln -sf /usr/local/libexec/docker/cli-plugins/docker-compose /usr/local/bin/docker-compose \
     && docker compose version \
     && docker-compose version
 
